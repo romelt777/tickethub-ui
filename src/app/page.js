@@ -13,7 +13,7 @@ export default function Home() {
           priority
         />
         <h1>TicketHub</h1>
-        <h2>Form Here</h2>
+        <h2>Go To Form Here</h2>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a

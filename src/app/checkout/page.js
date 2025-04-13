@@ -1,10 +1,18 @@
 import CheckoutForm from '@/components/CheckoutForm'
 
-const Checkout = () => {
+
+
+const Checkout = async (params) => {
+    const id = await params.id;
+    const quantity = await params.quantity;
+    const concertInfo = {
+        id: id,
+        quantity: quantity
+    }
+
     return (
         <div>
-            <h1>Checkout</h1>
-            <CheckoutForm></CheckoutForm>
+            <CheckoutForm concertInfo={concertInfo}></CheckoutForm>
         </div>
     )
 }

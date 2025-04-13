@@ -5,12 +5,12 @@ import { formSubmit } from '@/app/actions';
 import { useSearchParams } from 'next/navigation';
 
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ concertInfo }) => {
     //hold all data from the form fields
     const [formData, setFormData] = useState({
-        ConcertId: '', Email: '',
+        ConcertId: concertInfo.id, Email: '',
         Name: '', Phone: '',
-        Quantity: '', CreditCard: '',
+        Quantity: concertInfo.quantity, CreditCard: '',
         ExpirationDate: '', SecurityCode: '',
         Address: '', City: '',
         Province: '', PostalCode: '',
@@ -54,183 +54,56 @@ const CheckoutForm = () => {
     };
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <div>
-                        <label>
-                            Concert ID:
-                            <input
-                                type="number"
-                                name="ConcertId"
-                                value={formData.ConcertId}
-                                readOnly
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Email:
-                            <input
-                                type="email"
-                                name="Email"
-                                value={formData.Email}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Name:
-                            <input
-                                type="text"
-                                name="Name"
-                                value={formData.Name}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Phone:
-                            <input
-                                type="text"
-                                name="Phone"
-                                value={formData.Phone}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Quantity:
-                            <input
-                                type="number"
-                                name="Quantity"
-                                value={formData.Quantity}
-                                readOnly
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Credit Card:
-                            <input
-                                type="text"
-                                name="CreditCard"
-                                value={formData.CreditCard}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Expiration Date (MM/YY):
-                            <input
-                                type="text"
-                                name="ExpirationDate"
-                                value={formData.ExpirationDate}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Security Code:
-                            <input
-                                type="text"
-                                name="SecurityCode"
-                                value={formData.SecurityCode}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Address:
-                            <input
-                                type="text"
-                                name="Address"
-                                value={formData.Address}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            City:
-                            <input
-                                type="text"
-                                name="City"
-                                value={formData.City}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Province:
-                            <input
-                                type="text"
-                                name="Province"
-                                value={formData.Province}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Postal Code:
-                            <input
-                                type="text"
-                                name="PostalCode"
-                                value={formData.PostalCode}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Country:
-                            <input
-                                type="text"
-                                name="Country"
-                                value={formData.Country}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                    </div>
-                </div>
-                <div>
-                    <button type="submit" className="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 border-white-700 rounded">
-                        Submit Order
-                    </button>
-                </div>
-            </form>
-            <div>
-                {
-                    apiResponse &&
-                    (
-                        <p>{apiResponse}</p>
-                    )
-                }
-            </div>
-        </>
+        <form
+            onSubmit={handleSubmit}
+            className="bg-white max-w-2xl mx-auto p-8 rounded-xl shadow-md space-y-6"
+        >
+            <h2 className="text-2xl font-semibold text-gray-800">Checkout</h2>
 
-    );
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <FormInput label="Concert ID" name="ConcertId" value={formData.ConcertId || ''} readOnly />
+                <FormInput label="Quantity" name="Quantity" value={formData.Quantity || ''} readOnly />
+                <FormInput label="Email" name="Email" value={formData.Email} onChange={handleChange} type="email" />
+                <FormInput label="Name" name="Name" value={formData.Name} onChange={handleChange} />
+                <FormInput label="Phone" name="Phone" value={formData.Phone} onChange={handleChange} />
+                <FormInput label="Credit Card" name="CreditCard" value={formData.CreditCard} onChange={handleChange} />
+                <FormInput label="Expiration Date (MM/YY)" name="ExpirationDate" value={formData.ExpirationDate} onChange={handleChange} />
+                <FormInput label="Security Code" name="SecurityCode" value={formData.SecurityCode} onChange={handleChange} />
+                <FormInput label="Address" name="Address" value={formData.Address} onChange={handleChange} />
+                <FormInput label="City" name="City" value={formData.City} onChange={handleChange} />
+                <FormInput label="Province" name="Province" value={formData.Province} onChange={handleChange} />
+                <FormInput label="Postal Code" name="PostalCode" value={formData.PostalCode} onChange={handleChange} />
+                <FormInput label="Country" name="Country" value={formData.Country} onChange={handleChange} />
+            </div>
+
+            <button
+                type="submit"
+                className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition"
+            >
+                Submit Order
+            </button>
+
+            {apiResponse && <p className="text-green-600 font-medium">{apiResponse}</p>}
+        </form>
+    )
 }
+
+const FormInput = ({ label, name, value, onChange, readOnly = false, type = 'text' }) => (
+    <div className="flex flex-col">
+        <label htmlFor={name} className="mb-1 text-sm font-medium text-gray-700">
+            {label}
+        </label>
+        <input
+            id={name}
+            name={name}
+            type={type}
+            value={value}
+            onChange={onChange}
+            readOnly={readOnly}
+            className={`border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-300 ${readOnly ? 'bg-gray-100 text-gray-500 cursor-not-allowed' : ''}`}
+            required
+        />
+    </div>
+)
 
 export default CheckoutForm;

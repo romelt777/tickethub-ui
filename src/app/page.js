@@ -14,6 +14,7 @@ export default function Home() {
           priority
         />
         <h1>TicketHub</h1>
+        <Link href="/concerts">View All Concerts</Link>
         <Link href="/checkout">Go To Form Here</Link>
 
       </main>

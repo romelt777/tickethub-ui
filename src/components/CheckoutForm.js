@@ -1,7 +1,9 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { formSubmit } from '@/app/actions';
+import { useSearchParams } from 'next/navigation';
+
 
 const CheckoutForm = () => {
     //hold all data from the form fields
@@ -14,6 +16,18 @@ const CheckoutForm = () => {
         Province: '', PostalCode: '',
         Country: ''
     });
+
+    const searchParams = useSearchParams();
+    useEffect(() => {
+        const id = searchParams.get('id');
+        const quantity = searchParams.get('quantity');
+
+        setFormData((prev) => ({
+            ...prev,
+            ConcertId: id || '',
+            Quantity: quantity || '',
+        }));
+    }, [searchParams]);
 
     //hold the response from the api to display on webpage
     const [apiResponse, setApiResponse] = useState(null);
@@ -50,7 +64,7 @@ const CheckoutForm = () => {
                                 type="number"
                                 name="ConcertId"
                                 value={formData.ConcertId}
-                                onChange={handleChange}
+                                readOnly
                                 required
                             />
                         </label>
@@ -98,7 +112,7 @@ const CheckoutForm = () => {
                                 type="number"
                                 name="Quantity"
                                 value={formData.Quantity}
-                                onChange={handleChange}
+                                readOnly
                                 required
                             />
                         </label>

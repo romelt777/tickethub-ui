@@ -1,5 +1,5 @@
 import CheckoutForm from '@/components/CheckoutForm'
-
+import { Suspense } from 'react';
 
 
 const Checkout = async (params) => {
@@ -12,7 +12,9 @@ const Checkout = async (params) => {
 
     return (
         <div>
-            <CheckoutForm concertInfo={concertInfo}></CheckoutForm>
+            <Suspense fallback={<p>Loading checkout form...</p>}>
+                <CheckoutForm concertInfo={concertInfo}></CheckoutForm>
+            </Suspense>
         </div>
     )
 }

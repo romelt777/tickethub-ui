@@ -12,8 +12,16 @@ export const formSubmit = async (formData) => {
     });
 
     if (response.ok) {
-        return ('Order submitted successfully!');
+        return ({
+            status: response.status,
+            message: 'Order submitted successfully!'
+        });
     } else {
-        return ('Error submitting order.');
+        return (
+            {
+                status: response.status,
+                message: 'Error submitting order.'
+            }
+        );
     }
 }

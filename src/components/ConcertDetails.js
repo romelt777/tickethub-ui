@@ -45,7 +45,7 @@ const ConcertDetails = ({ concert }) => {
                 >
                     <button
                         type="button"
-                        className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-5 rounded-lg transition"
+                        className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-5 rounded-lg transition"
                     >
                         Book Now
                     </button>

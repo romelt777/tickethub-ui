@@ -32,6 +32,8 @@ const CheckoutForm = ({ concertInfo }) => {
     //hold the response from the api to display on webpage
     const [apiResponse, setApiResponse] = useState(null);
 
+    const [apiResponseStatus, setApiResponseStatus] = useState(null);
+
 
     //when form changes, the values are saved to the state.
     const handleChange = (e) => {
@@ -49,7 +51,8 @@ const CheckoutForm = ({ concertInfo }) => {
         //send formdata to formsubmit, function from actionJS
         const response = await formSubmit(formData);
         //setting the response to state, will display on webpage
-        setApiResponse(response);
+        setApiResponseStatus(response.status);
+        setApiResponse(response.message);
 
     };
 
@@ -78,12 +81,16 @@ const CheckoutForm = ({ concertInfo }) => {
 
             <button
                 type="submit"
-                className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition"
             >
                 Submit Order
             </button>
 
-            {apiResponse && <p className="text-green-600 font-medium">{apiResponse}</p>}
+            {apiResponse && (
+                <p className={`font-medium ${apiResponseStatus === 200 ? 'text-green-600' : 'text-red-600'}`}>
+                    {apiResponse}
+                </p>
+            )}
         </form>
     )
 }
@@ -100,7 +107,7 @@ const FormInput = ({ label, name, value, onChange, readOnly = false, type = 'tex
             value={value}
             onChange={onChange}
             readOnly={readOnly}
-            className={`border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-300 ${readOnly ? 'bg-gray-100 text-gray-500 cursor-not-allowed' : ''}`}
+            className={`border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300 ${readOnly ? 'bg-gray-100 text-gray-500 cursor-not-allowed' : ''}`}
             required
         />
     </div>
